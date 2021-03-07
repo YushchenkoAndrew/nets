@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 
-RUN apt update && apt install -y iputils-ping net-tools traceroute dnsutils iperf nmap tcpdump curl vim nginx apache2-utils
+RUN apt update && apt install -y iputils-ping net-tools traceroute dnsutils iperf nmap tcpdump curl vim nginx apache2-utils ftp lftp
 
 RUN mkdir -p /var/www/var25.com.ua/html/www/test
 RUN mkdir -p /var/www/var25.com.ua/html/web/test
