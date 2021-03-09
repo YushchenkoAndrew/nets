@@ -1,11 +1,13 @@
 # Simple Local Network with Docker
 
 ### Create subnet in Docker
+
 ```
 docker network create --subnet=172.16.100.0/24 --gateway=172.16.100.1 -d bridge subnet
 ```
 
 ### Start DNS Server
+
 ```
 $ docker run -d -t --cap-add NET_ADMIN --net=subnet ubuntu_dns
 ; Inside docker container start named service
@@ -13,6 +15,7 @@ $ service named start
 ```
 
 ### Start HTTP Server
+
 ```
 $ docker run -d -t --cap-add NET_ADMIN --net=subnet --dns=172.16.100.2 ubuntu_http
 ; Inside docker container start nginx service
@@ -20,6 +23,7 @@ $ service nginx start
 ```
 
 ### Start FTP Server
+
 ```
 $ docker run -d -t --cap-add NET_ADMIN --net=subnet --dns=172.16.100.2 ubuntu_ftp
 ; Inside docker container start vsftpd service
@@ -27,6 +31,7 @@ $ service vsftpd start
 ```
 
 ### Building Containers
+
 ```
 $ docker build -t ubuntu_dns ./DNS
 $ docker build -t ubuntu_http ./HTTP
