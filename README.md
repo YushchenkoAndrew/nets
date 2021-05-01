@@ -35,8 +35,8 @@ $ service vsftpd start
 ### Start ROUTE Server
 
 ```
-$ docker run -d -t --cap-add NET_ADMIN --net=subnet --privileged ubuntu_route 
-$ docker run -d -t --cap-add NET_ADMIN --net=subnet2 --privileged ubuntu_route 
+$ docker run -d -t --cap-add NET_ADMIN --net=subnet --privileged ubuntu_route
+$ docker run -d -t --cap-add NET_ADMIN --net=subnet2 --privileged ubuntu_route
 $ docker ps
 $ docker network connect hidenet <Container 1 ID>
 $ docker network connect hidenet <Container 2 ID>
@@ -49,13 +49,16 @@ $ service ospfd start
 ; For starting ripd routing
 $ service ripd start
 
-;; OSPF Confuguration in Docker container 1 (subnet = 172.16.100.0/24)
+;; OSPF Configuration in Docker container 1 (subnet = 172.16.100.0/24)
 $ vtysh
 $ conf t
 $ router ospf
-$ network network 11.1.1.0/29 area 0
-$ network network 172.16.100.0/24 area 0
+$ network 11.1.1.0/29 area 0
+$ network 172.16.100.0/24 area 0
 $ end
+
+;; OSPF Configuration in Docker container 2 (subnet = 172.16.25.0/24) is the same as in Docker container 1 but with different network
+$ network 172.16.25.0/24 area 0
 
 ; Check the routing table (after configuring Docker container 2)
 $ show ip ospf neighbor
@@ -63,12 +66,12 @@ $ show ip route
 $ ping 172.16.25.2
 
 
-;; RIP Confuguration in Docker container 1 (subnet = 172.16.100.0/24)
+;; RIP Configuration in Docker container 1 (subnet = 172.16.100.0/24)
 $ vtysh
 $ conf t
 $ router rip
-$ network network 11.1.1.0/29
-$ network network 172.16.100.0/24
+$ network 11.1.1.0/29
+$ network 172.16.100.0/24
 $ end
 
 ; Check the routing table (after configuring Docker container 2)
@@ -80,7 +83,6 @@ $ ping 172.16.25.2
 $ iptables -t nat -A POSTROUTING -s 11.1.1.0/29 -j MASQUERADE
 $ iptables -t nat -A POSTROUTING -o eth1 -j MASQUERADE
 ```
-
 
 ### Building Containers
 
