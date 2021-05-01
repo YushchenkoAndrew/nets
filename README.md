@@ -57,7 +57,8 @@ $ network 11.1.1.0/29 area 0
 $ network 172.16.100.0/24 area 0
 $ end
 
-;; OSPF Configuration in Docker container 2 (subnet = 172.16.25.0/24) is the same as in Docker container 1 but with different network
+;; OSPF Configuration in Docker container 2 (subnet = 172.16.25.0/24) is the same as in Docker container 1
+;; but with different network
 $ network 172.16.25.0/24 area 0
 
 ; Check the routing table (after configuring Docker container 2)
